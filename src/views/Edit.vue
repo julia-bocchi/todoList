@@ -32,9 +32,14 @@ const saveEvent = () => {
   } else {
     alert('什么都不写好意思吗')
   }
-  window.sessionStorage.setItem('eventList',JSON.stringify( EventsList.eventList))//保存到本地
+  console.log('Saving to sessionStorage:', JSON.stringify(EventsList.eventList))
+  window.sessionStorage.setItem('eventList', JSON.stringify(EventsList.eventList))
+  console.log('Reading from sessionStorage:', window.sessionStorage.getItem('eventList'))
   text.value = ''
   title.value = ''
+  console.log( window.location.href);
+  
+  window.location.href = '/#/'
 }
 
 </script>

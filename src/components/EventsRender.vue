@@ -24,12 +24,16 @@ import { useEventsListStore } from '@/stores/eventList'
 const EventsListStore = useEventsListStore()
 const update = (e) => {
   console.log(e.isFinished)
-  window.sessionStorage.setItem('eventList', JSON.stringify(eventList.eventList)) //保存到本地
+  console.log('Saving to sessionStorage:', JSON.stringify(EventsListStore.eventList))
+  window.sessionStorage.setItem('eventList', JSON.stringify(EventsListStore.eventList))
+  console.log('Reading from sessionStorage:', window.sessionStorage.getItem('eventList'))
 }
 const del = (id) => {
   console.log(id)
   EventsListStore.eventList.splice(id, 1)
-  window.sessionStorage.setItem('eventList', JSON.stringify(eventList.eventList)) //保存到本地
+  console.log('Saving to sessionStorage:', JSON.stringify(EventsListStore.eventList))
+  window.sessionStorage.setItem('eventList', JSON.stringify(EventsListStore.eventList))
+  console.log('Reading from sessionStorage:', window.sessionStorage.getItem('eventList'))
 }
 </script>
 

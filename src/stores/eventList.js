@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-const events = window.sessionStorage.getItem('eventList')
+const events = JSON.parse(window.sessionStorage.getItem('eventList') || '[]')
+console.log(events)
+
 export const useEventsListStore = defineStore('eventList', () => {
-  const eventList = reactive([...JSON.parse(window.sessionStorage.getItem('eventList'))])
+  const eventList = reactive([...events])
   const addEvent = (event) => {
     eventList.push(event)
   }

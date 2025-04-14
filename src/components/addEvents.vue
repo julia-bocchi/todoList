@@ -18,24 +18,32 @@ const eventList = useEventsListStore()
 
 let eventName = ref('') //事件名
 const addEvent = (e) => {
-  e.preventDefault()
-  if (!eventName.value.trim()) {
-    alert('不能输入空白事件')
-    return
-  }
+  try {
+    e.preventDefault()
+    if (!eventName.value.trim()) {
+      alert('不能输入空白事件')
+      return
+    }
 
-  const event = {
-    title: eventName.value,
-    createTime: new Date().toLocaleDateString(),
-    content: '还什么都没有呢QAQ', // 默认内容
-    startDate: '',
-    deadline: '', // 可以根据需要添加
-    isFinished: false // 新增属性，表示是否完成
+    const event = {
+      title: eventName.value,
+      createTime: new Date().toLocaleDateString(),
+      content: '还什么都没有呢QAQ', // 默认内容
+      startDate: '',
+      deadline: '', // 可以根据需要添加
+      isFinished: false, // 新增属性，表示是否完成
+    }
+
+    eventList.addEvent(event)
+    eventName.value = '' // 清空输入框
+
+    console.log('Saving to sessionStorage:', JSON.stringify(eventList.eventList))
+    window.sessionStorage.setItem('eventList', JSON.stringify(eventList.eventList))
+    console.log('Reading from sessionStorage:', window.sessionStorage.getItem('eventList'))
+  } catch (error) {
+    console.error('Error in addEvent:', error)
+    alert('发生错误，请稍后再试')
   }
-  eventList.addEvent(event)
-  eventName.value = '' // 清空输入框
-  // startDate.value = '' // 清空日期输入框
-  window.sessionStorage.setItem('eventList',JSON.stringify( eventList.eventList))//保存到本地
 }
 </script>
 
